@@ -1,7 +1,10 @@
 <nav>
     <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Courses App</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <a href="#!" class="brand-logo">Courses App</a>
+
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+        <ul class="right hide-on-med-and-down">
 
             {{#if isHome}}
                 <li class="active"><a href="/">Home page</a></li>
@@ -21,6 +24,38 @@
                 <li><a href="/add">Add courses</a></li>
             {{/if}}
 
+            {{#if isCart}}
+                <li class="active"><a href="/cart">Cart</a></li>
+            {{else}}
+                <li><a href="/cart">Cart</a></li>
+            {{/if}}
+
         </ul>
     </div>
 </nav>
+
+<ul class="sidenav" id="mobile-demo">
+    {{#if isHome}}
+        <li class="active"><a href="/">Home page</a></li>
+    {{else}}
+        <li><a href="/">Home page</a></li>
+    {{/if}}
+
+    {{#if isCourses}}
+        <li class="active"><a href="/courses">Courses</a></li>
+    {{else}}
+        <li><a href="/courses">Courses</a></li>
+    {{/if}}
+
+    {{#if isAdd}}
+        <li class="active"><a href="/add">Add courses</a></li>
+    {{else}}
+        <li><a href="/add">Add courses</a></li>
+    {{/if}}
+
+    {{#if isCart}}
+        <li class="active"><a href="/cart">Cart</a></li>
+    {{else}}
+        <li><a href="/cart">Cart</a></li>
+    {{/if}}
+</ul>

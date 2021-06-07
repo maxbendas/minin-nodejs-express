@@ -3,3 +3,8 @@ document.querySelectorAll('.price').forEach(node=>{
         { style: 'currency', currency: 'uah' })
         .format(node.textContent)
 })
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, {});
+});

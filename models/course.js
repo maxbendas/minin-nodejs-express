@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid')
+const {v4: uuidv4} = require('uuid')
 const fs = require('fs')
 const path = require('path')
 
@@ -10,13 +10,34 @@ class Course {
         this.id = uuidv4()
     }
 
-    toJSON(){
+    toJSON() {
         return {
             title: this.title,
             price: this.price,
             img: this.img,
             id: this.id
         }
+    }
+
+    static async update(course) {
+        const courses = await Course.getAll()
+
+        const idx = courses.findIndex(c => c.id === course.id)
+        courses[idx] = course
+
+        return new Promise((resolve, reject) => {
+            fs.writeFile(
+                path.join(__dirname, '..', 'data', 'courses.json'),
+                JSON.stringify(courses),
+                (err) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve()
+                    }
+                }
+            )
+        })
     }
 
     async save() {
@@ -37,8 +58,6 @@ class Course {
                 }
             )
         })
-
-        console.log(courses)
     }
 
     static getAll() {
@@ -55,6 +74,11 @@ class Course {
                 }
             )
         })
+    }
+
+    static async getById(id) {
+        const courses = await Course.getAll()
+        return courses.find(c => c.id === id)
     }
 }
 
